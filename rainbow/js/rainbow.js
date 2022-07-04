@@ -1,7 +1,9 @@
 var rainbow = angular.module("rainbow", []);
 
 rainbow.config(['$httpProvider', function($httpProvider) {
-	$httpProvider.defaults.withCredentials = true;
+	//$httpProvider.defaults.withCredentials = true;
+	$httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }])
 
 rainbow.config(['$qProvider', function($qProvider) {
@@ -17,7 +19,7 @@ rainbow.controller("mainController", ["$scope", "$http", "$location", "$rootScop
 	//GET Server Call
 	var getServerCall = function(url, callback) {
 		$http.get(url).then(function(response) {
-			callback && callback(response.data);
+			callback && callback(response.data); 
 		});
 	}
 
@@ -32,7 +34,7 @@ rainbow.controller("mainController", ["$scope", "$http", "$location", "$rootScop
 	
 	
 	$scope.getDetails = function(){
-		var url = "http://cors.io/?https://script.googleusercontent.com/macros/echo?user_content_key=g8sJKuPChd9E-Ux4jYzFsLntGO16sjuo0Nq7mwRCE22ACzvok0oGELxqzfNWyn6V1fNTQOH5uG9GExvTLI3tkh1J5HEsivRVm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnKAkVuMOP0Xxa5xaFW2iGWt95agbNNTzeeMuTbV9hmvzkRSWx3goBCdMpyTHzJheDcDHtV_VRSB-3I-0DkiSSA2cf63AjJOdNw&lib=MWKtqJa48KJb5P0VUPJWNISjMmuwgoQ0j";
+		var url = "https://script.googleusercontent.com/macros/echo?user_content_key=g8sJKuPChd9E-Ux4jYzFsLntGO16sjuo0Nq7mwRCE22ACzvok0oGELxqzfNWyn6V1fNTQOH5uG9GExvTLI3tkh1J5HEsivRVm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnKAkVuMOP0Xxa5xaFW2iGWt95agbNNTzeeMuTbV9hmvzkRSWx3goBCdMpyTHzJheDcDHtV_VRSB-3I-0DkiSSA2cf63AjJOdNw&lib=MWKtqJa48KJb5P0VUPJWNISjMmuwgoQ0j";
 		getServerCall(url, function(response){
 			console.log(response);
 		})
