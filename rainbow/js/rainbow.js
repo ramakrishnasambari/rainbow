@@ -15,7 +15,6 @@ rainbow.controller("mainController", ["$scope", "$http", "$location", "$rootScop
 	var baseURL = localUrl.split("?")[0];
 	console.log(baseURL);
 	$rootScope.title = "Rainbow Meadows"
-
 	//GET Server Call
 	var getServerCall = function(url, callback) {
 		$http.get(url).then(function(response) {
@@ -39,7 +38,18 @@ rainbow.controller("mainController", ["$scope", "$http", "$location", "$rootScop
 			console.log(response);
 		})
 	}
-	
 	$scope.getDetails();
+	
+	$scope.selectedMenu = "menu-home";
+	$scope.selectMenu = function(menu){
+		$scope.selectedMenu = menu;
+		$(".nav-item").removeClass("activeMenu");
+		$("."+menu).addClass("activeMenu");
+		/*if(menu=="menu-home"){
+			$('.carousel').carousel({
+		      interval: 2000
+		    })
+		}*/
+	}
 
 }]);
